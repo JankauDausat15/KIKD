@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FluffyCious | Shop Our Cakes</title>
+<link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;500&display=swap)" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #4e3a40;
+    background: linear-gradient(to bottom right, #fff9f9, #ffe8f0);
+  }
+
+  header {
+    background-color: #ffcad4;
+    padding: 1.5em 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8em;
+    color: #7a2845;
+    margin: 0;
+  }
+
+  nav a {
+    margin: 0 1em;
+    text-decoration: none;
+    color: #7a2845;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  nav a:hover { color: #c74d74; }
+
+  .hero {
+    text-align: center;
+    padding: 4em 1em;
+    background: url('[images.unsplash.com](https://images.unsplash.com/photo-1606335543042-57b4e9c62232?fit=crop&w=2000&q=80)') center/cover no-repeat;
+    color: white;
+    position: relative;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+  .hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5em;
+  }
+  .hero p { font-size: 1.2em; margin-top: 0.5em; }
+
+  .shop-section {
+    max-width: 1200px;
+    margin: 3em auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2em;
+    padding: 0 1em;
+  }
+
+  .cake-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    position: relative;
+  }
+  .cake-card:hover {
+    transform: translateY(-5px);
+  }
+  .cake-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+  .cake-info {
+    padding: 1em;
+  }
+  .cake-info h3 {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    color: #7a2845;
+  }
+  .cake-info p {
+    font-size: 0.9em;
+    margin: 0.5em 0;
+  }
+  .price {
+    color: #c74d74;
+    font-weight: 600;
+  }
+  .btn {
+    display: inline-block;
+    background: #c74d74;
+    color: white;
+    text-decoration: none;
+    padding: 0.6em 1.2em;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+  }
+  .btn:hover {
+    background: #7a2845;
+  }
+
+  .cart-panel {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100%;
+    background: white;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    transition: right 0.4s ease;
+    padding: 1.5em;
+    overflow-y: auto;
+  }
+  .cart-panel.active {
+    right: 0;
+  }
+  .cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cart-header h4 { margin: 0; }
+  .cart-item {
+    border-bottom: 1px solid #ffe3eb;
+    margin: 1em 0;
+    padding-bottom: .5em;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 2em;
+    color: #70455d;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .cake-card { animation: fadeInUp 0.8s ease both; }
+
+  button.cart-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #7a2845;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>FluffyCious 🎂</h1>
+  <nav>
+    <a href="#shop">Shop</a>
+    <a href="#custom">Custom Orders</a>
+    <a href="#contact">Contact</a>
+    <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h2>Indulge in Sweet Perfection</h2>
+    <p>Handcrafted cakes made with love, delivered fresh to your door.</p>
+    <a href="#shop" class="btn">Shop Now</a>
+  </div>
+</section>
+
+<section id="shop" class="shop-section">
+  <div class="cake-card">
+    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1612198793072-1d91989e8596?fit=crop&w=800)" alt="Pink Drip Cake">
+    <div class="cake-info">
+      <h3>Pink Drip Cake</h3>
+      <p>Strawberries, whipped cream, and vanilla sponge perfection.</p>
+      <p class="price">$48</p>
+      <a href="#" class="btn" onclick="addToCart('Pink Drip Cake', 48)">Add to Cart</a>
+    </div>
+  </div>
+
+  <div class="cake-card">
+    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1559628233-b9b2f1e7a99f?fit=crop&w=800)" alt="Rose Petal Delight">
+    <div class="cake-info">
+      <h3>Rose Petal Delight</h3>
+      <p>Lychee mousse and edible rose petals for delicate elegance.</p>
+      <p class="price">$52</p>
+      <a href="#" class="btn" onclick="addToCart('Rose Petal Delight', 52)">Add to Cart</a>
+    </div>
+  </div>
+
+  <div class="cake-card">
+    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1571115764594-5986d789c69b?fit=crop&w=800)" alt="Velvet Fantasy">
+    <div class="cake-info">
+      <h3>Velvet Fantasy</h3>
+      <p>Red velvet and cream cheese frosting—pure indulgence.</p>
+      <p class="price">$55</p>
+      <a href="#" class="btn" onclick="addToCart('Velvet Fantasy', 55)">Add to Cart</a>
+    </div>
+  </div>
+</section>
+
+<div class="cart-panel" id="cart">
+  <div class="cart-header">
+    <h4>Your Cart</h4>
+    <button onclick="toggleCart()">✕</button>
+  </div>
+  <div id="cart-items"></div>
+  <h4>Total: $<span id="cart-total">0</span></h4>
+  <a href="#" class="btn" style="width: 100%; text-align:center;">Proceed to Checkout</a>
+</div>
+
+<footer class="footer">
+  ✦ Handmade With Love ✦ FluffyCious © 2024 ✦
+</footer>
+
+<script>
+let cart = [];
+function addToCart(name, price) {
+  cart.push({ name, price });
+  document.getElementById('cart-count').innerText = cart.length;
+  renderCart();
+  toggleCart(true);
+}
+function renderCart() {
+  const cartItems = document.getElementById('cart-items');
+  cartItems.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <strong>${item.name}</strong><br>
+      $${item.price}
+    </div>
+  `).join('');
+  document.getElementById('cart-total').innerText = cart.reduce((sum, i) => sum + i.price, 0);
+}
+function toggleCart(forceOpen = false) {
+  const cartPanel = document.getElementById('cart');
+  if (forceOpen) cartPanel.classList.add('active');
+  else cartPanel.classList.toggle('active');
+}
+</script>
+</body>
+</html>
