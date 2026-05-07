@@ -1,258 +1,956 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>FluffyCious | Shop Our Cakes</title>
-<link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;500&display=swap)" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FluffyCious — Checkout & Contact</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    color: #4e3a40;
-    background: linear-gradient(to bottom right, #fff9f9, #ffe8f0);
-  }
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --pink:#F7B8BF;
+  --pink-dark:#d4848d;
+  --pink-mid:#e8a0a8;
+  --pink-light:#fce8ea;
+  --pink-pale:#fff4f5;
+  --cream:#fff8f9;
+  --brown:#3d2227;
+  --brown-mid:#5a3a3f;
+  --brown-light:#8a6a6e;
+  --brown-faint:#c4a8ab;
+  --gold:#c9a96e;
+  --gold-light:#f0e0c5;
+  --white:#ffffff;
+  --border:#f0dce0;
+  --border-strong:#e0c4c8;
+}
 
-  header {
-    background-color: #ffcad4;
-    padding: 1.5em 2em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-  }
+body{font-family:'Poppins',sans-serif;background:var(--cream);color:var(--brown);overflow-x:hidden;min-height:100vh;}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;}
 
-  header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8em;
-    color: #7a2845;
-    margin: 0;
-  }
+/* ── TOP NAV ── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 60px;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);position:sticky;top:0;z-index:200;gap:16px;}
+.logo-pill{font-family:'Playfair Display',serif;background:var(--pink-dark);color:white;padding:8px 18px;border-radius:0 0 16px 16px;font-size:16px;font-weight:700;letter-spacing:.5px;box-shadow:0 4px 16px rgba(212,132,141,0.28);flex-shrink:0;}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--brown-light);}
+.breadcrumb a{text-decoration:none;color:var(--brown-faint);transition:.2s;}
+.breadcrumb a:hover{color:var(--pink-dark);}
+.breadcrumb span{color:var(--brown-faint);}
+.breadcrumb strong{color:var(--brown-mid);}
+.trust-bar{display:flex;align-items:center;gap:16px;}
+.trust-item{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--brown-light);white-space:nowrap;}
+.trust-dot{width:6px;height:6px;border-radius:50%;background:var(--pink);flex-shrink:0;}
 
-  nav a {
-    margin: 0 1em;
-    text-decoration: none;
-    color: #7a2845;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  nav a:hover { color: #c74d74; }
+/* ── PAGE LAYOUT ── */
+.page-wrap{display:grid;grid-template-columns:1fr 380px;gap:0;min-height:calc(100vh - 70px);}
 
-  .hero {
-    text-align: center;
-    padding: 4em 1em;
-    background: url('[images.unsplash.com](https://images.unsplash.com/photo-1606335543042-57b4e9c62232?fit=crop&w=2000&q=80)') center/cover no-repeat;
-    color: white;
-    position: relative;
-  }
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.4);
-  }
-  .hero-content {
-    position: relative;
-    z-index: 2;
-  }
-  .hero h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5em;
-  }
-  .hero p { font-size: 1.2em; margin-top: 0.5em; }
+/* ── LEFT PANEL ── */
+.left-panel{padding:48px 52px 60px 56px;border-right:1px solid var(--border);}
 
-  .shop-section {
-    max-width: 1200px;
-    margin: 3em auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2em;
-    padding: 0 1em;
-  }
+/* ── TABS ── */
+.page-tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:40px;}
+.page-tab{padding:12px 24px;font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--brown-faint);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:.3s;letter-spacing:.3px;}
+.page-tab.active{color:var(--pink-dark);border-bottom-color:var(--pink-dark);}
+.page-tab:hover:not(.active){color:var(--brown-light);}
+.tab-content{display:none;animation:fadein .4s ease;}
+.tab-content.active{display:block;}
+@keyframes fadein{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 
-  .cake-card {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease;
-    overflow: hidden;
-    position: relative;
-  }
-  .cake-card:hover {
-    transform: translateY(-5px);
-  }
-  .cake-card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-  }
-  .cake-info {
-    padding: 1em;
-  }
-  .cake-info h3 {
-    margin: 0;
-    font-family: 'Playfair Display', serif;
-    color: #7a2845;
-  }
-  .cake-info p {
-    font-size: 0.9em;
-    margin: 0.5em 0;
-  }
-  .price {
-    color: #c74d74;
-    font-weight: 600;
-  }
-  .btn {
-    display: inline-block;
-    background: #c74d74;
-    color: white;
-    text-decoration: none;
-    padding: 0.6em 1.2em;
-    border-radius: 5px;
-    transition: background 0.3s ease;
-  }
-  .btn:hover {
-    background: #7a2845;
-  }
+/* ── SECTION HEADING ── */
+.form-section-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--brown);margin-bottom:6px;}
+.form-section-title em{font-style:italic;color:var(--pink-dark);}
+.form-section-sub{font-size:13px;color:var(--brown-light);font-weight:300;margin-bottom:32px;}
 
-  .cart-panel {
-    position: fixed;
-    top: 0;
-    right: -400px;
-    width: 350px;
-    height: 100%;
-    background: white;
-    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-    transition: right 0.4s ease;
-    padding: 1.5em;
-    overflow-y: auto;
-  }
-  .cart-panel.active {
-    right: 0;
-  }
-  .cart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .cart-header h4 { margin: 0; }
-  .cart-item {
-    border-bottom: 1px solid #ffe3eb;
-    margin: 1em 0;
-    padding-bottom: .5em;
-  }
+/* ── FORM FIELDS ── */
+.field-group{margin-bottom:20px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+label{display:block;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--brown-light);margin-bottom:7px;}
+input[type=text],input[type=email],input[type=tel],input[type=number],select,textarea{
+  width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:12px;font-family:'Poppins',sans-serif;font-size:14px;color:var(--brown);background:white;transition:.3s;outline:none;appearance:none;-webkit-appearance:none;}
+input:focus,select:focus,textarea:focus{border-color:var(--pink-mid);box-shadow:0 0 0 4px rgba(247,184,191,0.13);}
+input::placeholder,textarea::placeholder{color:var(--brown-faint);font-weight:300;}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a6a6e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer;}
+textarea{resize:vertical;min-height:110px;line-height:1.7;}
 
-  .footer {
-    text-align: center;
-    padding: 2em;
-    color: #70455d;
-  }
+/* ── DELIVERY CARDS ── */
+.delivery-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}
+.delivery-card{border:1.5px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;transition:.3s;background:white;position:relative;}
+.delivery-card:hover{border-color:var(--pink-mid);}
+.delivery-card.selected{border-color:var(--pink-dark);background:var(--pink-pale);}
+.delivery-card input[type=radio]{position:absolute;opacity:0;pointer-events:none;}
+.delivery-card-icon{font-size:20px;margin-bottom:7px;}
+.delivery-card-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--brown);margin-bottom:2px;}
+.delivery-card-sub{font-size:11px;color:var(--brown-light);font-weight:300;}
+.delivery-card-price{font-size:12px;font-weight:600;color:var(--pink-dark);margin-top:5px;}
+.delivery-check{position:absolute;top:12px;right:12px;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);background:white;display:flex;align-items:center;justify-content:center;transition:.3s;font-size:9px;}
+.delivery-card.selected .delivery-check{background:var(--pink-dark);border-color:var(--pink-dark);color:white;}
 
-  /* Animations */
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .cake-card { animation: fadeInUp 0.8s ease both; }
+/* ── PAYMENT METHODS ── */
+.payment-methods{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;}
+.pay-method{border:1.5px solid var(--border);border-radius:12px;padding:11px 16px;cursor:pointer;transition:.3s;background:white;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--brown-mid);}
+.pay-method:hover{border-color:var(--pink-mid);}
+.pay-method.selected{border-color:var(--pink-dark);background:var(--pink-pale);color:var(--brown);}
+.pay-icon{font-size:17px;}
+.pay-card-fields{margin-top:18px;display:none;}
+.pay-card-fields.show{display:block;}
 
-  button.cart-btn {
-    background: transparent;
-    border: none;
-    font-size: 1.2em;
-    cursor: pointer;
-    color: #7a2845;
-  }
+/* ── STEP PROGRESS ── */
+.checkout-steps{display:flex;align-items:center;margin-bottom:36px;gap:0;}
+.step-item{display:flex;align-items:center;gap:8px;flex:1;}
+.step-circle{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;border:1.5px solid var(--border);background:white;color:var(--brown-faint);flex-shrink:0;transition:.3s;}
+.step-item.done .step-circle{background:var(--pink-dark);border-color:var(--pink-dark);color:white;}
+.step-item.active .step-circle{background:var(--brown);border-color:var(--brown);color:white;}
+.step-label{font-size:11px;font-weight:500;color:var(--brown-faint);}
+.step-item.done .step-label,.step-item.active .step-label{color:var(--brown);}
+.step-line{flex:1;height:1px;background:var(--border);margin:0 6px;}
+.step-item.done + .step-line{background:var(--pink-mid);}
+
+/* ── SPECIAL REQUEST ── */
+.special-wrap{border:1.5px dashed var(--pink);border-radius:14px;padding:18px;background:var(--pink-pale);margin-bottom:20px;}
+.special-wrap label{color:var(--pink-dark);}
+
+/* ── SUBMIT BTN ── */
+.submit-btn{width:100%;padding:16px;background:var(--brown);color:white;border:none;border-radius:50px;font-family:'Playfair Display',serif;font-size:17px;font-weight:600;cursor:pointer;transition:.4s;position:relative;overflow:hidden;letter-spacing:.3px;margin-top:8px;}
+.submit-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(247,184,191,0.15),transparent);transition:.5s;}
+.submit-btn:hover{background:var(--pink-dark);}
+.submit-btn:hover::before{left:100%;}
+.submit-btn:active{transform:scale(0.99);}
+.btn-sub{font-family:'Poppins',sans-serif;font-size:11px;font-weight:300;opacity:.6;display:block;margin-top:4px;}
+.outline-btn{width:100%;padding:14px;background:transparent;color:var(--brown-mid);border:1.5px solid var(--border-strong);border-radius:50px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:.3s;margin-top:10px;}
+.outline-btn:hover{border-color:var(--pink);color:var(--pink-dark);}
+
+/* ── DIVIDER ── */
+.form-divider{border:none;border-top:1px solid var(--border);margin:28px 0;}
+
+/* ── RIGHT PANEL ── */
+.right-panel{background:white;padding:44px 40px;border-left:1px solid var(--border);position:relative;}
+.right-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--pink-light),var(--pink-dark),var(--gold));}
+.order-header{margin-bottom:28px;}
+.order-header h3{font-family:'Playfair Display',serif;font-size:20px;color:var(--brown);margin-bottom:4px;}
+.order-header p{font-size:12px;color:var(--brown-light);font-weight:300;}
+
+/* ── ORDER ITEMS ── */
+.order-items{display:flex;flex-direction:column;gap:14px;margin-bottom:24px;}
+.order-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--pink-pale);border-radius:14px;border:1px solid var(--border);}
+.order-item-img{width:50px;height:50px;border-radius:10px;background:var(--pink-light);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;overflow:hidden;}
+.order-item-img img{width:100%;height:100%;object-fit:cover;border-radius:10px;}
+.order-item-info{flex:1;min-width:0;}
+.order-item-name{font-family:'Playfair Display',serif;font-size:13px;font-weight:600;color:var(--brown);margin-bottom:2px;}
+.order-item-meta{font-size:10px;color:var(--brown-light);font-weight:300;}
+.order-item-qty{display:flex;align-items:center;gap:7px;margin-top:5px;}
+.qty-btn{width:22px;height:22px;border-radius:50%;background:white;border:1px solid var(--border);cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;color:var(--brown-mid);transition:.2s;font-family:'Poppins',sans-serif;}
+.qty-btn:hover{background:var(--pink);color:white;border-color:var(--pink);}
+.qty-num{font-size:12px;font-weight:600;color:var(--brown);min-width:18px;text-align:center;}
+.order-item-price{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--pink-dark);flex-shrink:0;}
+.item-remove{background:none;border:none;cursor:pointer;color:var(--brown-faint);font-size:14px;transition:.2s;padding:3px;}
+.item-remove:hover{color:#c0392b;}
+
+/* ── PROMO ── */
+.promo-wrap{display:flex;gap:8px;margin-bottom:20px;}
+.promo-input{flex:1;padding:11px 14px;border:1.5px solid var(--border);border-radius:11px;font-size:13px;font-family:'Poppins',sans-serif;color:var(--brown);outline:none;transition:.3s;min-width:0;}
+.promo-input:focus{border-color:var(--pink-mid);}
+.promo-btn{padding:11px 16px;background:var(--pink-light);color:var(--pink-dark);border:1.5px solid var(--pink);border-radius:11px;font-size:12px;font-weight:600;cursor:pointer;transition:.3s;white-space:nowrap;font-family:'Poppins',sans-serif;}
+.promo-btn:hover{background:var(--pink);color:white;}
+.promo-success{display:none;font-size:12px;color:#27ae60;font-weight:500;margin-top:6px;align-items:center;gap:6px;}
+.promo-success.show{display:flex;}
+
+/* ── PRICE BREAKDOWN ── */
+.price-breakdown{border-top:1px solid var(--border);padding-top:18px;margin-bottom:20px;}
+.price-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;}
+.price-row-label{font-size:13px;color:var(--brown-light);}
+.price-row-val{font-size:13px;font-weight:500;color:var(--brown-mid);}
+.price-row.discount .price-row-val{color:#27ae60;}
+.price-row.total{border-top:1px solid var(--border);padding-top:12px;margin-top:4px;}
+.price-row.total .price-row-label{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--brown);}
+.price-row.total .price-row-val{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--pink-dark);}
+
+/* ── TRUST BADGES ── */
+.trust-badges{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px;}
+.trust-badge{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--brown-light);background:var(--pink-pale);border-radius:10px;padding:7px 10px;}
+.trust-badge-icon{font-size:13px;}
+
+/* ── CALENDAR ── */
+.date-picker-wrap{background:var(--pink-pale);border:1.5px solid var(--border);border-radius:14px;padding:16px;margin-bottom:20px;}
+.date-picker-title{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--brown-light);margin-bottom:10px;}
+.mini-calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+.cal-day-header{text-align:center;font-size:9px;font-weight:600;color:var(--brown-faint);padding:3px 0;}
+.cal-day{text-align:center;font-size:11px;padding:5px 2px;border-radius:7px;cursor:pointer;transition:.2s;color:var(--brown-mid);}
+.cal-day:hover{background:var(--pink-light);}
+.cal-day.selected{background:var(--pink-dark);color:white;font-weight:600;}
+.cal-day.disabled{color:var(--border);cursor:default;}
+.cal-day.today{font-weight:700;color:var(--brown);}
+.cal-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.cal-nav-btn{background:none;border:none;cursor:pointer;color:var(--brown-light);font-size:15px;padding:4px;transition:.2s;}
+.cal-nav-btn:hover{color:var(--pink-dark);}
+.cal-month{font-size:12px;font-weight:600;color:var(--brown);}
+
+/* ── SUCCESS STATE ── */
+.success-overlay{display:none;text-align:center;padding:36px 20px;}
+.success-overlay.show{display:block;}
+.success-circle{width:72px;height:72px;border-radius:50%;background:var(--pink-light);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:32px;animation:popIn .5s cubic-bezier(.34,1.56,.64,1);}
+@keyframes popIn{from{transform:scale(0);}to{transform:scale(1);}}
+.success-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--brown);margin-bottom:8px;}
+.success-sub{font-size:13px;color:var(--brown-light);font-weight:300;line-height:1.7;}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start;}
+.contact-info-card{background:var(--brown);border-radius:24px;padding:36px;color:white;}
+.contact-info-card h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:8px;}
+.contact-info-card p{font-size:13px;color:rgba(255,255,255,.6);font-weight:300;line-height:1.8;margin-bottom:28px;}
+.contact-items{display:flex;flex-direction:column;gap:18px;}
+.contact-item{display:flex;align-items:flex-start;gap:12px;}
+.contact-item-icon{width:38px;height:38px;border-radius:10px;background:rgba(247,184,191,0.12);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.contact-item-label{font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:600;margin-bottom:2px;}
+.contact-item-val{font-size:13px;color:rgba(255,255,255,.85);}
+.social-links{display:flex;gap:10px;margin-top:28px;}
+.social-link{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:.3s;text-decoration:none;}
+.social-link:hover{background:var(--pink);transform:translateY(-2px);}
+.contact-topics{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:24px;}
+.topic-chip{padding:7px 14px;border-radius:50px;border:1.5px solid var(--border);background:white;font-size:12px;font-weight:500;color:var(--brown-light);cursor:pointer;transition:.3s;}
+.topic-chip.active{background:var(--pink);border-color:var(--pink);color:white;}
+.topic-chip:hover:not(.active){border-color:var(--pink-mid);color:var(--brown);}
+.rating-wrap{display:flex;gap:7px;margin-top:8px;}
+.rating-star{font-size:22px;cursor:pointer;color:var(--border);transition:.2s;line-height:1;}
+.rating-star.active,.rating-star:hover{color:#F7B8BF;}
+
+/* ── FAQ ── */
+.faq-list{margin-top:36px;}
+.faq-item{border:1.5px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:10px;background:white;transition:.3s;}
+.faq-item:hover{border-color:var(--pink-mid);}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;cursor:pointer;}
+.faq-q-text{font-family:'Playfair Display',serif;font-size:14px;font-weight:600;color:var(--brown);padding-right:12px;}
+.faq-toggle{font-size:20px;color:var(--pink-dark);transition:.3s;font-weight:300;flex-shrink:0;}
+.faq-item.open .faq-toggle{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:.4s;}
+.faq-item.open .faq-a{max-height:200px;}
+.faq-a-inner{padding:0 20px 16px;font-size:13px;color:var(--brown-light);font-weight:300;line-height:1.8;}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:20px;right:16px;left:16px;background:var(--brown);color:white;padding:13px 20px;border-radius:14px;font-size:13px;font-weight:500;transform:translateY(80px);opacity:0;transition:.4s cubic-bezier(.34,1.56,.64,1);z-index:999;display:flex;align-items:center;gap:10px;max-width:340px;margin:0 auto;}
+.toast.show{transform:translateY(0);opacity:1;}
+
+/* ── ORDER PANEL TOGGLE (mobile) ── */
+.order-panel-toggle{display:none;width:100%;padding:14px 20px;background:white;border:none;border-top:1px solid var(--border);border-bottom:1px solid var(--border);font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--brown);cursor:pointer;display:none;align-items:center;justify-content:space-between;}
+.order-panel-toggle span{color:var(--pink-dark);}
+.order-toggle-icon{font-size:13px;transition:.3s;}
+.order-toggle-icon.open{transform:rotate(180deg);}
+
+/* ════════════════════════════════
+   RESPONSIVE
+════════════════════════════════ */
+@media(max-width:900px){
+  .page-wrap{display:block;}
+
+  /* Nav */
+  nav{padding:12px 16px;}
+  .trust-bar{display:none;}
+  .breadcrumb{font-size:12px;}
+
+  /* Left panel */
+  .left-panel{padding:28px 16px 40px;}
+
+  /* Tabs */
+  .page-tabs{margin-bottom:28px;}
+  .page-tab{padding:10px 16px;font-size:14px;}
+
+  /* Step labels hide on tiny screens */
+  .step-label{display:none;}
+  .checkout-steps{margin-bottom:28px;}
+
+  /* Field rows go 1-col */
+  .field-row{grid-template-columns:1fr;}
+
+  /* Delivery cards 1-col */
+  .delivery-cards{grid-template-columns:1fr 1fr;}
+
+  /* Contact grid stack */
+  .contact-grid{grid-template-columns:1fr;}
+
+  /* Payment chips wrap */
+  .pay-method{padding:10px 14px;font-size:12px;}
+
+  /* Right panel: collapsible order summary */
+  .right-panel{border-left:none;border-top:2px solid var(--border);padding:0;}
+  .order-panel-toggle{display:flex;}
+  .order-panel-inner{display:none;padding:24px 16px;}
+  .order-panel-inner.open{display:block;}
+  .right-panel::before{display:none;}
+  .right-panel-top-bar{height:4px;background:linear-gradient(90deg,var(--pink-light),var(--pink-dark),var(--gold));}
+
+  .trust-badges{grid-template-columns:1fr 1fr;}
+
+  .form-section-title{font-size:22px;}
+}
+
+@media(max-width:600px){
+  .delivery-cards{grid-template-columns:1fr;}
+  .trust-badges{grid-template-columns:1fr 1fr;}
+  .payment-methods{gap:8px;}
+  .pay-method{font-size:11px;padding:9px 12px;}
+  .contact-info-card{padding:24px 20px;}
+  .contact-topics{gap:6px;}
+  .topic-chip{font-size:11px;padding:6px 12px;}
+  .page-tab{padding:10px 12px;font-size:13px;}
+}
 </style>
 </head>
 <body>
 
-<header>
-  <h1>FluffyCious 🎂</h1>
-  <nav>
-    <a href="#shop">Shop</a>
-    <a href="#custom">Custom Orders</a>
-    <a href="#contact">Contact</a>
-    <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</button>
-  </nav>
-</header>
-
-<section class="hero">
-  <div class="hero-content">
-    <h2>Indulge in Sweet Perfection</h2>
-    <p>Handcrafted cakes made with love, delivered fresh to your door.</p>
-    <a href="#shop" class="btn">Shop Now</a>
-  </div>
-</section>
-
-<section id="shop" class="shop-section">
-  <div class="cake-card">
-    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1612198793072-1d91989e8596?fit=crop&w=800)" alt="Pink Drip Cake">
-    <div class="cake-info">
-      <h3>Pink Drip Cake</h3>
-      <p>Strawberries, whipped cream, and vanilla sponge perfection.</p>
-      <p class="price">$48</p>
-      <a href="#" class="btn" onclick="addToCart('Pink Drip Cake', 48)">Add to Cart</a>
-    </div>
-  </div>
-
-  <div class="cake-card">
-    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1559628233-b9b2f1e7a99f?fit=crop&w=800)" alt="Rose Petal Delight">
-    <div class="cake-info">
-      <h3>Rose Petal Delight</h3>
-      <p>Lychee mousse and edible rose petals for delicate elegance.</p>
-      <p class="price">$52</p>
-      <a href="#" class="btn" onclick="addToCart('Rose Petal Delight', 52)">Add to Cart</a>
-    </div>
-  </div>
-
-  <div class="cake-card">
-    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1571115764594-5986d789c69b?fit=crop&w=800)" alt="Velvet Fantasy">
-    <div class="cake-info">
-      <h3>Velvet Fantasy</h3>
-      <p>Red velvet and cream cheese frosting—pure indulgence.</p>
-      <p class="price">$55</p>
-      <a href="#" class="btn" onclick="addToCart('Velvet Fantasy', 55)">Add to Cart</a>
-    </div>
-  </div>
-</section>
-
-<div class="cart-panel" id="cart">
-  <div class="cart-header">
-    <h4>Your Cart</h4>
-    <button onclick="toggleCart()">✕</button>
-  </div>
-  <div id="cart-items"></div>
-  <h4>Total: $<span id="cart-total">0</span></h4>
-  <a href="#" class="btn" style="width: 100%; text-align:center;">Proceed to Checkout</a>
+<div id="toast" class="toast">
+  <span id="toast-icon">🎂</span>
+  <span id="toast-msg">Added!</span>
 </div>
 
-<footer class="footer">
-  ✦ Handmade With Love ✦ FluffyCious © 2024 ✦
-</footer>
+<!-- NAV -->
+<nav>
+  <div class="logo-pill">Fluffy</div>
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span>›</span>
+    <strong id="breadcrumb-current">Checkout</strong>
+  </div>
+  <div class="trust-bar">
+    <div class="trust-item"><div class="trust-dot"></div>Secure Payment</div>
+    <div class="trust-item"><div class="trust-dot"></div>Same-Day Delivery</div>
+  </div>
+</nav>
+
+<!-- PAGE WRAP -->
+<div class="page-wrap">
+
+  <!-- ═══ LEFT PANEL ═══ -->
+  <div class="left-panel">
+
+    <!-- TABS -->
+    <div class="page-tabs">
+      <div class="page-tab active" onclick="switchTab('checkout',this)">🎂 Checkout</div>
+      <div class="page-tab" onclick="switchTab('contact',this)">✉ Contact Us</div>
+    </div>
+
+    <!-- ════ CHECKOUT TAB ════ -->
+    <div class="tab-content active" id="content-checkout">
+
+      <!-- STEP PROGRESS -->
+      <div class="checkout-steps">
+        <div class="step-item done" id="step1">
+          <div class="step-circle">✓</div>
+          <div class="step-label">Cart</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-item active" id="step2">
+          <div class="step-circle">2</div>
+          <div class="step-label">Delivery</div>
+        </div>
+        <div class="step-line" id="line2"></div>
+        <div class="step-item" id="step3">
+          <div class="step-circle">3</div>
+          <div class="step-label">Payment</div>
+        </div>
+        <div class="step-line" id="line3"></div>
+        <div class="step-item" id="step4">
+          <div class="step-circle">4</div>
+          <div class="step-label">Confirm</div>
+        </div>
+      </div>
+
+      <!-- STEP 2: DELIVERY -->
+      <div id="checkout-step-2">
+        <h2 class="form-section-title">Delivery <em>Details</em></h2>
+        <p class="form-section-sub">Tell us where to bring your sweet masterpiece.</p>
+
+        <div class="field-row field-group">
+          <div class="field-group">
+            <label>First Name</label>
+            <input type="text" placeholder="e.g. Ayu">
+          </div>
+          <div class="field-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="e.g. Rahmawati">
+          </div>
+        </div>
+        <div class="field-group">
+          <label>WhatsApp Number</label>
+          <input type="tel" placeholder="+62 8xx xxxx xxxx">
+        </div>
+        <div class="field-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="hello@youremail.com">
+        </div>
+        <div class="field-group">
+          <label>Delivery Address</label>
+          <input type="text" placeholder="Jl. Mawar No. 12, Purwokerto">
+        </div>
+        <div class="field-row field-group">
+          <div class="field-group">
+            <label>City</label>
+            <select>
+              <option>Purwokerto</option>
+              <option>Purbalingga</option>
+              <option>Cilacap</option>
+              <option>Banyumas</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Kecamatan</label>
+            <input type="text" placeholder="Kecamatan">
+          </div>
+        </div>
+
+        <hr class="form-divider">
+
+        <div class="field-group">
+          <label>Delivery Method</label>
+          <div class="delivery-cards">
+            <div class="delivery-card selected" onclick="selectDelivery(this)">
+              <input type="radio" checked>
+              <div class="delivery-check">✓</div>
+              <div class="delivery-card-icon">🏍️</div>
+              <div class="delivery-card-title">Express Courier</div>
+              <div class="delivery-card-sub">2–4 hours delivery</div>
+              <div class="delivery-card-price">Rp 15.000</div>
+            </div>
+            <div class="delivery-card" onclick="selectDelivery(this)">
+              <input type="radio">
+              <div class="delivery-check"></div>
+              <div class="delivery-card-icon">🚗</div>
+              <div class="delivery-card-title">Same-Day Luxury</div>
+              <div class="delivery-card-sub">White-glove delivery</div>
+              <div class="delivery-card-price">Rp 35.000</div>
+            </div>
+            <div class="delivery-card" onclick="selectDelivery(this)">
+              <input type="radio">
+              <div class="delivery-check"></div>
+              <div class="delivery-card-icon">🏪</div>
+              <div class="delivery-card-title">Self Pickup</div>
+              <div class="delivery-card-sub">Ready in 30 min</div>
+              <div class="delivery-card-price">Free</div>
+            </div>
+            <div class="delivery-card" onclick="selectDelivery(this)">
+              <input type="radio">
+              <div class="delivery-check"></div>
+              <div class="delivery-card-icon">📅</div>
+              <div class="delivery-card-title">Schedule Later</div>
+              <div class="delivery-card-sub">Choose your date</div>
+              <div class="delivery-card-price">Rp 20.000</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="special-wrap">
+          <label>💌 Special Request / Message on Cake</label>
+          <textarea placeholder="e.g. Happy Birthday, Siti! Please write in cursive with pink frosting. Allergen note: no nuts. Gift wrap please ✨" style="min-height:80px;margin-top:8px;"></textarea>
+        </div>
+
+        <button class="submit-btn" onclick="goToStep3()">
+          Continue to Payment
+          <span class="btn-sub">Step 2 of 3 — Secure & encrypted</span>
+        </button>
+      </div>
+
+      <!-- STEP 3: PAYMENT -->
+      <div id="checkout-step-3" style="display:none;">
+        <h2 class="form-section-title">Payment <em>Method</em></h2>
+        <p class="form-section-sub">Choose how you'd like to complete your sweet order.</p>
+
+        <div class="field-group">
+          <label>Select Payment</label>
+          <div class="payment-methods">
+            <div class="pay-method selected" onclick="selectPay(this,'card')">
+              <span class="pay-icon">💳</span> Credit / Debit Card
+            </div>
+            <div class="pay-method" onclick="selectPay(this,'bca')">
+              <span class="pay-icon">🏦</span> BCA Transfer
+            </div>
+            <div class="pay-method" onclick="selectPay(this,'gopay')">
+              <span class="pay-icon">💚</span> GoPay
+            </div>
+            <div class="pay-method" onclick="selectPay(this,'qris')">
+              <span class="pay-icon">📱</span> QRIS
+            </div>
+          </div>
+        </div>
+
+        <div class="pay-card-fields show" id="card-fields">
+          <div class="field-group">
+            <label>Card Number</label>
+            <input type="text" placeholder="1234  5678  9012  3456" maxlength="19" oninput="formatCard(this)">
+          </div>
+          <div class="field-row field-group">
+            <div class="field-group">
+              <label>Expiry Date</label>
+              <input type="text" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)">
+            </div>
+            <div class="field-group">
+              <label>CVV</label>
+              <input type="text" placeholder="•••" maxlength="3">
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Cardholder Name</label>
+            <input type="text" placeholder="As printed on card">
+          </div>
+        </div>
+
+        <div id="transfer-info" style="display:none;background:var(--pink-pale);border:1.5px solid var(--border);border-radius:14px;padding:18px;margin-bottom:18px;">
+          <p style="font-size:13px;color:var(--brown-mid);font-weight:500;margin-bottom:8px;">Transfer to BCA Account:</p>
+          <p style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--brown);letter-spacing:2px;">1234 5678 90</p>
+          <p style="font-size:12px;color:var(--brown-light);margin-top:4px;">a.n. FluffyCious Bakery • confirm via WhatsApp after transfer</p>
+        </div>
+
+        <div id="qris-info" style="display:none;text-align:center;padding:20px;background:var(--pink-pale);border:1.5px solid var(--border);border-radius:14px;margin-bottom:18px;">
+          <div style="width:110px;height:110px;background:var(--brown);margin:0 auto 10px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(255,255,255,.4);">[ QR CODE ]</div>
+          <p style="font-size:12px;color:var(--brown-light);">Scan with GoPay, OVO, DANA, or any QRIS app</p>
+        </div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button class="outline-btn" style="margin-top:0;width:auto;padding:14px 20px;flex-shrink:0;" onclick="backToStep2()">← Back</button>
+          <button class="submit-btn" onclick="placeOrder()" style="flex:1;margin-top:0;min-width:180px;">
+            Place Order — Rp<span id="total-display">375.000</span>
+            <span class="btn-sub">🔒 256-bit SSL encrypted</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-overlay" id="order-success">
+        <div class="success-circle">🎂</div>
+        <h2 class="success-title">Order Placed!</h2>
+        <p class="success-sub">Your sweet masterpiece is being crafted with love.<br>You'll receive a WhatsApp confirmation in minutes.<br><br><strong style="color:var(--pink-dark);">Order #FC-2026-0847</strong></p>
+        <button class="submit-btn" style="max-width:260px;margin:20px auto 0;" onclick="resetOrder()">
+          Order Again 🎀
+        </button>
+      </div>
+
+    </div><!-- /checkout tab -->
+
+    <!-- ════ CONTACT TAB ════ -->
+    <div class="tab-content" id="content-contact">
+      <h2 class="form-section-title">Let's <em>Connect</em></h2>
+      <p class="form-section-sub">We'd love to hear from you — custom orders, questions, or just to say hello.</p>
+
+      <div class="contact-grid">
+        <div class="contact-info-card">
+          <h3>Talk to Us 🎀</h3>
+          <p>Our team of pastry artisans are ready to help create your perfect moment, one cake at a time.</p>
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="contact-item-icon">📍</div>
+              <div>
+                <div class="contact-item-label">Our Atelier</div>
+                <div class="contact-item-val">Jl. Merdeka No. 8, Purwokerto<br>Jawa Tengah, Indonesia</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon">📞</div>
+              <div>
+                <div class="contact-item-label">WhatsApp</div>
+                <div class="contact-item-val">+62 811 234 5678</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon">✉️</div>
+              <div>
+                <div class="contact-item-label">Email</div>
+                <div class="contact-item-val">hello@fluffycious.com</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon">🕐</div>
+              <div>
+                <div class="contact-item-label">Operating Hours</div>
+                <div class="contact-item-val">Mon–Sat: 07.00 – 20.00<br>Sunday: 09.00 – 16.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="social-links">
+            <a class="social-link" href="#">📷</a>
+            <a class="social-link" href="#">🐦</a>
+            <a class="social-link" href="#">📘</a>
+            <a class="social-link" href="#">💬</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="field-group">
+            <label>What can we help you with?</label>
+            <div class="contact-topics">
+              <div class="topic-chip active" onclick="toggleTopic(this)">Custom Order</div>
+              <div class="topic-chip" onclick="toggleTopic(this)">Wedding Cake</div>
+              <div class="topic-chip" onclick="toggleTopic(this)">Bulk / Corporate</div>
+              <div class="topic-chip" onclick="toggleTopic(this)">Delivery Question</div>
+              <div class="topic-chip" onclick="toggleTopic(this)">Feedback</div>
+              <div class="topic-chip" onclick="toggleTopic(this)">Other</div>
+            </div>
+          </div>
+          <div class="field-row field-group">
+            <div class="field-group">
+              <label>Your Name</label>
+              <input type="text" placeholder="Full name">
+            </div>
+            <div class="field-group">
+              <label>Contact Number</label>
+              <input type="tel" placeholder="+62 8xx...">
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+          <div class="field-group">
+            <label>Event Date (if applicable)</label>
+            <input type="text" placeholder="e.g. 15 Juni 2026">
+          </div>
+          <div class="field-group">
+            <label>Your Message</label>
+            <textarea placeholder="Tell us about your dream cake — size, flavors, design inspiration, colors, number of guests, budget..."></textarea>
+          </div>
+          <div class="field-group">
+            <label>Rate your previous experience (optional)</label>
+            <div class="rating-wrap" id="rating">
+              <span class="rating-star" onclick="setRating(1)">★</span>
+              <span class="rating-star" onclick="setRating(2)">★</span>
+              <span class="rating-star" onclick="setRating(3)">★</span>
+              <span class="rating-star" onclick="setRating(4)">★</span>
+              <span class="rating-star" onclick="setRating(5)">★</span>
+            </div>
+          </div>
+          <button class="submit-btn" onclick="sendContact()">
+            Send Message ✨
+            <span class="btn-sub">We reply within 2 hours on WhatsApp</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="faq-list">
+        <h3 style="font-family:'Playfair Display',serif;font-size:20px;color:var(--brown);margin-bottom:18px;margin-top:8px;">Frequently Asked <em style="font-style:italic;color:var(--pink-dark);">Questions</em></h3>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span class="faq-q-text">How far in advance should I order a custom cake?</span><span class="faq-toggle">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">For standard custom cakes, we recommend at least 48 hours notice. For elaborate wedding or multi-tier cakes, please book 1–2 weeks in advance to ensure we can dedicate the artisan time your cake deserves.</div></div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span class="faq-q-text">Do you offer gluten-free or vegan options?</span><span class="faq-toggle">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">Yes! We offer gluten-free sponge bases and fully vegan options using plant-based butter and aquafaba meringue. Please mention your dietary requirements in the special notes when ordering.</div></div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span class="faq-q-text">What areas do you deliver to?</span><span class="faq-toggle">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">We currently deliver within Purwokerto, Banyumas, Purbalingga, and Cilacap. For locations outside these areas, please contact us directly — we may be able to arrange special delivery for larger orders.</div></div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span class="faq-q-text">Can I visit the bakery to taste test before ordering?</span><span class="faq-toggle">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">Absolutely — we love meeting our clients! Tasting sessions are available Tuesday–Saturday from 10.00–17.00 by appointment. For wedding cake tastings, we recommend booking a dedicated 45-minute session via WhatsApp.</div></div>
+        </div>
+      </div>
+    </div><!-- /contact tab -->
+
+  </div><!-- /left-panel -->
+
+  <!-- ═══ RIGHT PANEL ═══ -->
+  <div class="right-panel">
+    <div class="right-panel-top-bar"></div>
+
+    <!-- Mobile toggle button -->
+    <button class="order-panel-toggle" onclick="toggleOrderPanel(this)" id="order-toggle-btn">
+      <span>🛒 Your Order — <span id="total-preview">Rp 375.000</span></span>
+      <span class="order-toggle-icon" id="order-toggle-icon">▾</span>
+    </button>
+
+    <div class="order-panel-inner" id="order-panel-inner">
+      <div class="order-header">
+        <h3>Your Order 🎀</h3>
+        <p>Review your selection before checkout</p>
+      </div>
+
+      <div class="order-items" id="order-items">
+        <div class="order-item" data-price="120000">
+          <div class="order-item-img"><img src="pinkdrip.png" alt="" onerror="this.style.display='none';this.parentNode.innerHTML='🎂'"></div>
+          <div class="order-item-info">
+            <div class="order-item-name">Pink Drip Cake</div>
+            <div class="order-item-meta">Signature · Vanilla Sponge</div>
+            <div class="order-item-qty">
+              <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+              <span class="qty-num">1</span>
+              <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+            </div>
+          </div>
+          <div>
+            <div class="order-item-price">Rp120k</div>
+            <button class="item-remove" onclick="removeItem(this)" title="Remove">✕</button>
+          </div>
+        </div>
+        <div class="order-item" data-price="90000">
+          <div class="order-item-img"><img src="strawberrycake.png" alt="" onerror="this.style.display='none';this.parentNode.innerHTML='🍓'"></div>
+          <div class="order-item-info">
+            <div class="order-item-name">Strawberry Cake</div>
+            <div class="order-item-meta">Signature · Fresh Strawberry</div>
+            <div class="order-item-qty">
+              <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+              <span class="qty-num">1</span>
+              <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+            </div>
+          </div>
+          <div>
+            <div class="order-item-price">Rp90k</div>
+            <button class="item-remove" onclick="removeItem(this)" title="Remove">✕</button>
+          </div>
+        </div>
+        <div class="order-item" data-price="150000">
+          <div class="order-item-img" style="background:var(--pink-light);">🌸</div>
+          <div class="order-item-info">
+            <div class="order-item-name">Rose Petal Delight</div>
+            <div class="order-item-meta">Seasonal · Lychee Mousse</div>
+            <div class="order-item-qty">
+              <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+              <span class="qty-num">1</span>
+              <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+            </div>
+          </div>
+          <div>
+            <div class="order-item-price">Rp150k</div>
+            <button class="item-remove" onclick="removeItem(this)" title="Remove">✕</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="date-picker-wrap">
+        <div class="date-picker-title">📅 Select Delivery Date</div>
+        <div class="cal-nav">
+          <button class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
+          <span class="cal-month" id="cal-month-label">Mei 2026</span>
+          <button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
+        </div>
+        <div class="mini-calendar" id="mini-cal"></div>
+      </div>
+
+      <div class="promo-wrap">
+        <input class="promo-input" type="text" placeholder="Promo code (try FLUFFY10)" id="promo-input">
+        <button class="promo-btn" onclick="applyPromo()">Apply</button>
+      </div>
+      <div class="promo-success" id="promo-success">✅ FLUFFY10 applied — 10% off!</div>
+
+      <div class="price-breakdown">
+        <div class="price-row">
+          <span class="price-row-label">Subtotal</span>
+          <span class="price-row-val" id="subtotal-val">Rp 360.000</span>
+        </div>
+        <div class="price-row">
+          <span class="price-row-label">Delivery</span>
+          <span class="price-row-val">Rp 15.000</span>
+        </div>
+        <div class="price-row discount" id="discount-row" style="display:none;">
+          <span class="price-row-label">Discount (FLUFFY10)</span>
+          <span class="price-row-val" id="discount-val">− Rp 36.000</span>
+        </div>
+        <div class="price-row total">
+          <span class="price-row-label">Total</span>
+          <span class="price-row-val" id="grand-total">Rp 375.000</span>
+        </div>
+      </div>
+
+      <div class="trust-badges">
+        <div class="trust-badge"><span class="trust-badge-icon">🔒</span>Secure & Encrypted</div>
+        <div class="trust-badge"><span class="trust-badge-icon">🚀</span>Same-Day Delivery</div>
+        <div class="trust-badge"><span class="trust-badge-icon">🔄</span>Easy Refunds</div>
+        <div class="trust-badge"><span class="trust-badge-icon">🎀</span>Gift Wrapping</div>
+      </div>
+
+      <div style="text-align:center;padding-top:14px;border-top:1px solid var(--border);">
+        <p style="font-size:12px;color:var(--brown-faint);line-height:1.8;">🍰 All cakes are made fresh to order<br>Questions? WhatsApp +62 811 234 5678</p>
+      </div>
+    </div><!-- /order-panel-inner -->
+  </div><!-- /right-panel -->
+
+</div><!-- /page-wrap -->
 
 <script>
-let cart = [];
-function addToCart(name, price) {
-  cart.push({ name, price });
-  document.getElementById('cart-count').innerText = cart.length;
-  renderCart();
-  toggleCart(true);
+// ── TAB SWITCH
+function switchTab(tab, el) {
+  document.querySelectorAll('.page-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('content-'+tab).classList.add('active');
+  document.getElementById('breadcrumb-current').textContent = tab==='checkout' ? 'Checkout' : 'Contact Us';
 }
-function renderCart() {
-  const cartItems = document.getElementById('cart-items');
-  cartItems.innerHTML = cart.map(item => `
-    <div class="cart-item">
-      <strong>${item.name}</strong><br>
-      $${item.price}
-    </div>
-  `).join('');
-  document.getElementById('cart-total').innerText = cart.reduce((sum, i) => sum + i.price, 0);
+
+// ── ORDER PANEL TOGGLE (mobile)
+function toggleOrderPanel(btn) {
+  const inner = document.getElementById('order-panel-inner');
+  const icon = document.getElementById('order-toggle-icon');
+  const isOpen = inner.classList.contains('open');
+  inner.classList.toggle('open');
+  icon.classList.toggle('open');
 }
-function toggleCart(forceOpen = false) {
-  const cartPanel = document.getElementById('cart');
-  if (forceOpen) cartPanel.classList.add('active');
-  else cartPanel.classList.toggle('active');
+
+// On desktop always show order panel
+function checkPanelVisibility() {
+  const inner = document.getElementById('order-panel-inner');
+  if(window.innerWidth > 900) {
+    inner.style.display = 'block';
+  } else {
+    inner.style.display = inner.classList.contains('open') ? 'block' : 'none';
+  }
 }
+window.addEventListener('resize', checkPanelVisibility);
+checkPanelVisibility();
+
+// ── CHECKOUT STEPS
+function goToStep3() {
+  document.getElementById('checkout-step-2').style.display='none';
+  document.getElementById('checkout-step-3').style.display='block';
+  document.getElementById('step3').classList.add('active');
+  document.getElementById('line2').style.background='var(--pink-mid)';
+  showToast('🏠','Delivery info saved!');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function backToStep2() {
+  document.getElementById('checkout-step-3').style.display='none';
+  document.getElementById('checkout-step-2').style.display='block';
+  document.getElementById('step3').classList.remove('active','done');
+}
+function placeOrder() {
+  document.getElementById('checkout-step-3').style.display='none';
+  document.getElementById('order-success').classList.add('show');
+  document.getElementById('step4').classList.add('active','done');
+  document.getElementById('line3').style.background='var(--pink-mid)';
+  showToast('🎂','Order placed! Yay!');
+}
+function resetOrder() {
+  document.getElementById('order-success').classList.remove('show');
+  document.getElementById('checkout-step-2').style.display='block';
+  ['step3','step4'].forEach(s=>{ const el=document.getElementById(s); el.classList.remove('active','done'); });
+  document.getElementById('line2').style.background='';
+  document.getElementById('line3').style.background='';
+}
+
+// ── DELIVERY CARDS
+function selectDelivery(card) {
+  document.querySelectorAll('.delivery-card').forEach(c=>{ c.classList.remove('selected'); c.querySelector('.delivery-check').textContent=''; });
+  card.classList.add('selected');
+  card.querySelector('.delivery-check').textContent='✓';
+}
+
+// ── PAYMENT
+function selectPay(el, type) {
+  document.querySelectorAll('.pay-method').forEach(m=>m.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('card-fields').className = 'pay-card-fields'+(type==='card'?' show':'');
+  document.getElementById('transfer-info').style.display = type==='bca'?'block':'none';
+  document.getElementById('qris-info').style.display = (type==='qris'||type==='gopay')?'block':'none';
+}
+
+// ── CARD FORMATTING
+function formatCard(input) {
+  let v = input.value.replace(/\D/g,'').substring(0,16);
+  input.value = v.replace(/(.{4})/g,'$1  ').trim();
+}
+function formatExpiry(input) {
+  let v = input.value.replace(/\D/g,'');
+  if(v.length>=2) v = v.substring(0,2)+' / '+v.substring(2,4);
+  input.value = v;
+}
+
+// ── ORDER ITEMS
+function changeQty(btn, delta) {
+  const item = btn.closest('.order-item');
+  const numEl = item.querySelector('.qty-num');
+  let q = parseInt(numEl.textContent)+delta;
+  if(q<1) q=1;
+  numEl.textContent = q;
+  updateTotals();
+}
+function removeItem(btn) {
+  btn.closest('.order-item').style.cssText='opacity:0;transform:scale(.95);transition:.3s;';
+  setTimeout(()=>{ btn.closest('.order-item').remove(); updateTotals(); },300);
+}
+function updateTotals() {
+  let sub=0;
+  document.querySelectorAll('.order-item').forEach(item=>{
+    const price=parseInt(item.dataset.price)||0;
+    const qty=parseInt(item.querySelector('.qty-num').textContent)||1;
+    sub+=price*qty;
+  });
+  const delivery=15000;
+  const discount=promoApplied?Math.round(sub*0.1):0;
+  const total=sub+delivery-discount;
+  document.getElementById('subtotal-val').textContent='Rp '+sub.toLocaleString('id-ID');
+  document.getElementById('grand-total').textContent='Rp '+total.toLocaleString('id-ID');
+  document.getElementById('total-display').textContent=total.toLocaleString('id-ID');
+  document.getElementById('total-preview').textContent='Rp '+total.toLocaleString('id-ID');
+  if(promoApplied) document.getElementById('discount-val').textContent='− Rp '+discount.toLocaleString('id-ID');
+}
+
+// ── PROMO
+let promoApplied=false;
+function applyPromo() {
+  const code=document.getElementById('promo-input').value.trim().toUpperCase();
+  if(code==='FLUFFY10') {
+    promoApplied=true;
+    document.getElementById('promo-success').classList.add('show');
+    document.getElementById('discount-row').style.display='flex';
+    updateTotals();
+    showToast('🎉','Promo code applied!');
+  } else {
+    showToast('❌','Invalid promo code');
+  }
+}
+
+// ── CALENDAR
+let calYear=2026, calMonth=4;
+const months=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+const days=['Mo','Tu','We','Th','Fr','Sa','Su'];
+let selectedDay=null;
+
+function renderCal() {
+  const cal=document.getElementById('mini-cal');
+  document.getElementById('cal-month-label').textContent=months[calMonth]+' '+calYear;
+  cal.innerHTML='';
+  days.forEach(d=>{ const h=document.createElement('div');h.className='cal-day-header';h.textContent=d;cal.appendChild(h); });
+  const firstDay=new Date(calYear,calMonth,1).getDay();
+  const offset=(firstDay+6)%7;
+  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  const today=new Date();
+  for(let i=0;i<offset;i++){ const e=document.createElement('div');e.className='cal-day disabled';cal.appendChild(e); }
+  for(let d=1;d<=daysInMonth;d++) {
+    const e=document.createElement('div');
+    e.className='cal-day';
+    e.textContent=d;
+    const isPast=new Date(calYear,calMonth,d)<new Date(today.getFullYear(),today.getMonth(),today.getDate());
+    if(isPast){ e.className='cal-day disabled'; }
+    else {
+      if(calYear===today.getFullYear()&&calMonth===today.getMonth()&&d===today.getDate()) e.classList.add('today');
+      if(selectedDay===d) e.classList.add('selected');
+      e.onclick=()=>{ document.querySelectorAll('.cal-day').forEach(x=>x.classList.remove('selected')); e.classList.add('selected'); selectedDay=d; showToast('📅','Delivery date: '+d+' '+months[calMonth]); };
+    }
+    cal.appendChild(e);
+  }
+}
+function changeMonth(dir) {
+  calMonth+=dir;
+  if(calMonth>11){calMonth=0;calYear++;}
+  if(calMonth<0){calMonth=11;calYear--;}
+  selectedDay=null; renderCal();
+}
+renderCal();
+
+// ── CONTACT
+function toggleTopic(el){ el.classList.toggle('active'); }
+let currentRating=0;
+function setRating(n){ currentRating=n; document.querySelectorAll('.rating-star').forEach((s,i)=>s.classList.toggle('active',i<n)); }
+function sendContact(){ showToast('✉️',"Message sent! We'll reply within 2 hours."); }
+
+// ── FAQ
+function toggleFaq(item){ item.classList.toggle('open'); }
+
+// ── TOAST
+function showToast(icon, msg) {
+  document.getElementById('toast-icon').textContent=icon;
+  document.getElementById('toast-msg').textContent=msg;
+  const t=document.getElementById('toast');
+  t.classList.add('show');
+  clearTimeout(window._tt);
+  window._tt=setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+updateTotals();
 </script>
 </body>
 </html>
